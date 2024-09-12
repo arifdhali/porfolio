@@ -6,7 +6,7 @@ import { Link, NavLink } from 'react-router-dom'
 const Post = () => {
     const [getposts, setGetPosts] = useState(null);
     const [response, setResponse] = useState(null);
-    const getCategory = async () => {
+    const getPost = async () => {
         try {
             const res = await axios.get(`${import.meta.env.VITE_API_URL}admin/post`);
             if (res.status === 200) {
@@ -18,7 +18,7 @@ const Post = () => {
     };
 
     useEffect(() => {
-        getCategory();
+        getPost();
     }, [])
     return (
         <div >

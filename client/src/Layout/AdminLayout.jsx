@@ -12,7 +12,6 @@ const AdminLayout = () => {
         if (!isAuthenticated) {
             navigate("/login");
         }
-        console.log(isAuthenticated);
     }, [isAuthenticated, navigate]);
 
 

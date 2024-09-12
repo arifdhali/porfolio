@@ -8,11 +8,23 @@ class PostModels extends BaseModal {
         this.date = date
     }
 
-    async getPosts() {
-        let getQuery = 'SELECT id, post_title,post_content,post_status,post_publish_date FROM post';
-        let response = await this.excutingQuery(getQuery);
-        return response;
-
+    async getPosts(id) {
+        try {
+            let getQuery = 'SELECT id, post_title,post_content,post_status,post_publish_date FROM post';
+            if (id) {
+                let getSelectPost = `SELECT P.id, P.category_id, P.post_title, P.post_content, P.post_thumbnail, PC.category as post_category
+                                    FROM post P
+                                    RIGHT JOIN post_category PC
+                                    ON P.category_id = PC.id
+                                    WHERE P.id = ?`;
+                ;
+                return await this.excutingQuery(getSelectPost, id);
+            }
+            return await this.excutingQuery(getQuery);
+        } catch {
+            throw new Error("Error Edit post: " + error.message);
+        }
+      
     }
 
     async createPost(data) {

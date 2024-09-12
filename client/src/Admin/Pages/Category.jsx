@@ -50,6 +50,9 @@ const Category = () => {
             setResponse({ status: false, message: error.message });
         }
     };
+    useEffect(() => {
+        getCategory();
+    }, [])
 
     const handleDelete = async () => {
         try {
@@ -81,11 +84,6 @@ const Category = () => {
             setResponse({ status: false, message: error.message });
         }
     };
-
-    useEffect(() => {
-        getCategory();
-    }, []);
-
     return (
         <div>
             <div className="text-end my-3">

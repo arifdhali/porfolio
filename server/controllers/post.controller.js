@@ -11,13 +11,13 @@ const getPostsController = async (req, res) => {
 
     try {
 
-        let response = await postModelInstance.getPosts();        
+        let response = await postModelInstance.getPosts();
         return res.json({
             status: true,
             message: "Post get success",
             response
         })
-        
+
 
     } catch (error) {
         return res.json({
@@ -84,7 +84,32 @@ const creatPostController = async (req, res) => {
     }
 };
 
+
+// EDIT 
+
+const editPostController = async (req, res) => {
+    try {
+        const { id } = req.params;
+        let response = await postModelInstance.getPosts(id);
+        return res.json({
+            status: true,
+            edit_data: response
+        })
+    } catch (error) {
+        return res.json({
+            status: false,
+            message: "Internal Server Error",
+            error: error.message || "Unknown error occurred",
+        })
+
+
+    }
+
+
+}
+
 module.exports = {
     getPostsController,
-    creatPostController
+    creatPostController,
+    editPostController
 };

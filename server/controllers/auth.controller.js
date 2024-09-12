@@ -28,7 +28,7 @@ const loginController = async (req, res) => {
                     expiresIn: "1h"
                 }
             );
-            res.cookie('Login_token', token, { maxAge: 1 * 60 * 60 * 1000, httpOnly: true , SameSite:"None"});
+            res.cookie('Login_token', token, { maxAge: 1 * 60 * 60 * 1000, httpOnly: true, SameSite: "None" });
             return res.json({
                 status: true,
                 message: "Login successful"
@@ -43,6 +43,12 @@ const loginController = async (req, res) => {
     }
 }
 
+const logOutController = (req, res) => {
+    //const { Login_token } = ;    
+    console.log(res.cookie);
+}
+
 module.exports = {
-    loginController
+    loginController,
+    logOutController
 };

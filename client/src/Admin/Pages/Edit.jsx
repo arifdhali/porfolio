@@ -1,7 +1,8 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
+import { useParams } from 'react-router-dom';
 
-const Postedit = () => {
+const Edit = () => {
     const [response, setResponse] = useState(null);
     const [postInfo, setPostInfo] = useState({
         title: '',
@@ -13,21 +14,51 @@ const Postedit = () => {
     const [previewImg, setPreviewImg] = useState(null);
     const [loading, setLoading] = useState(false);
 
-    // Fetch categories
-    const getCategory = async () => {
+    // Fetch post data and categories
+    const params = useParams();
+
+    const getAllPostData = async () => {
         try {
-            const res = await axios.get(`${import.meta.env.VITE_API_URL}admin/post/category`);
+            const { id } = params;
+            let res = await axios.get(`${import.meta.env.VITE_API_URL}admin/post/edit/${id}`);
             if (res?.data?.status) {
-                setCategories(res?.data?.data);
+                setResponse(res.data.edit_data || {});
+
+            } else {
+                setResponse(null);
             }
         } catch (error) {
-            setResponse({ status: false, message: error.message });
+            console.error(`Error while fetching post data for ID: ${id}`, error.message);
+        }
+    };
+
+    const getAllCategories = async () => {
+        try {
+            let res = await axios.get(`${import.meta.env.VITE_API_URL}admin/post/categories`);
+            if (res?.data?.status) {
+                setCategories(res.data.categories || []);
+            }
+        } catch (error) {
+            console.error('Error while fetching categories', error.message);
         }
     };
 
     useEffect(() => {
-        getCategory();
+        getAllPostData();
+        //getAllCategories();
+        response && response.map((item) => setPostInfo(item))
     }, []);
+
+    useEffect(() => {
+        if (response) {
+            setPostInfo({
+                title: response?.post_title || '',
+                featured_img: response?.featured_img || null,
+                category: response?.category || '0',
+                content: response?.content || ''
+            });
+        }
+    }, [response]);
 
     // Handle form input changes
     const handleForm = (e) => {
@@ -47,44 +78,45 @@ const Postedit = () => {
     // Handle form submission
     const handleSubmit = async (e) => {
         e.preventDefault();
-        setLoading(true);
-        let formData = new FormData();
-        for (const key in postInfo) {
-            if (postInfo[key]) {
-                formData.append(key, postInfo[key]);
-            }
-        }
+        // setLoading(true);
+        // let formData = new FormData();
+        // for (const key in postInfo) {
+        //     if (postInfo[key]) {
+        //         formData.append(key, postInfo[key]);
+        //     }
+        // }
 
-        try {
-            let res = await axios.post(`${import.meta.env.VITE_API_URL}admin/post/create`, formData, {
-                headers: {
-                    'Content-Type': 'multipart/form-data',
-                },
-            });
+        // try {
+        //     let res = await axios.post(`${import.meta.env.VITE_API_URL}admin/post/create`, formData, {
+        //         headers: {
+        //             'Content-Type': 'multipart/form-data',
+        //         },
+        //     });
 
-            if (res?.data?.status) {
-                setResponse(res?.data);
-                // Reset form fields
-                setPostInfo({
-                    title: '',
-                    featured_img: null,
-                    category: '0',
-                    content: ''
-                });
-                setPreviewImg(null);
-            } else {
-                setResponse(res?.data);
-            }
-        } catch (error) {
-            setResponse({ status: false, message: error.message });
-        } finally {
-            setLoading(false);
-        }
+        //     if (res?.data?.status) {
+        //         setResponse(res?.data);
+        //         // Reset form fields
+        //         setPostInfo({
+        //             title: '',
+        //             featured_img: null,
+        //             category: '0',
+        //             content: ''
+        //         });
+        //         setPreviewImg(null);
+        //     } else {
+        //         setResponse(res?.data);
+        //     }
+        // } catch (error) {
+        //     setResponse({ status: false, message: error.message });
+        // } finally {
+        //     setLoading(false);
+        // }
     };
 
+    console.log(postInfo);
     return (
         <div className='pt-5'>
-            <form onSubmit={handleSubmit} >
+            <form onSubmit={handleSubmit}>
                 {/* Post Title */}
                 <div className="mb-3">
                     <label htmlFor="postTitle" className="form-label">Post Title</label>
@@ -94,8 +126,7 @@ const Postedit = () => {
                         id="postTitle"
                         placeholder="Enter your post title"
                         name='title'
-                        value={postInfo.title}
-                        onChange={handleForm}
+                        value={postInfo.title || ''}
                     />
                 </div>
 
@@ -108,35 +139,34 @@ const Postedit = () => {
                             className="form-control h-100"
                             id="featuredImage"
                             name='featured_img'
-                            onChange={handleForm}
                         />
-                        <p className='btn btn-primary position-absolute top-0 end-0 pe-none' style={{ width: "250px" }}>
+                        {/* <p className='btn btn-primary position-absolute top-0 end-0 pe-none' style={{ width: "250px" }}>
                             {`${previewImg ? "Re-" : ""}Upload`}
                         </p>
-                        <p className={`response-${response?.status ? 'success' : 'error'}`}>
+                        <p className={`text-${response?.status ? 'success' : 'danger'}`}>
                             {response?.message || ""}
-                        </p>
+                        </p> */}
                     </div>
                     {/* Preview Image Section */}
-                    {previewImg && (
+                    {/* {previewImg && (
                         <div className="mt-2" id="imagePreview">
                             <img src={previewImg} alt="Preview" className="img-fluid img-thumbnail" />
                         </div>
-                    )}
+                    )} */}
                 </div>
 
                 {/* Select Category */}
                 <div className="mb-3">
                     <label htmlFor="categorySelect" className="form-label">Select Category</label>
-                    <select className="form-select" id="categorySelect" name='category' value={postInfo.category} onChange={handleForm}>
+                    {/* <select className="form-select" id="categorySelect" name='category' value={postInfo.category} onChange={handleForm}>
                         {categories.length > 0 ? (
                             categories.map((cat) => (
-                                <option value={cat.id} key={cat.id}>{cat.category}</option>
+                                <option value={cat.category_id} key={cat.category_id}>{cat.category}</option>
                             ))
                         ) : (
                             <option value="0">No Category</option>
                         )}
-                    </select>
+                    </select> */}
                 </div>
 
                 {/* Content */}
@@ -148,8 +178,7 @@ const Postedit = () => {
                         rows="3"
                         placeholder="Enter your content here"
                         name='content'
-                        value={postInfo.content}
-                        onChange={handleForm}
+                        value={postInfo.content || ''}
                     ></textarea>
                 </div>
 
@@ -164,4 +193,4 @@ const Postedit = () => {
     );
 };
 
-export default Postedit;
+export default Edit;

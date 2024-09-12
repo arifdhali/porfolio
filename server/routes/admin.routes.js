@@ -1,16 +1,15 @@
 const express = require('express');
 const route = express.Router();
 const { createCategory, getCategory, deleteCategory, updateCategory } = require('../controllers/category.controller');
-const { creatPostController, getPostsController } = require('../controllers/post.controller');
+const { creatPostController, getPostsController, editPostController } = require('../controllers/post.controller');
 const multer = require('../utils/Multer.config');
-const AuthMiddleware = require('../Auth/middleware');
 
 
 //HOME 
-route.get("/",  (req, res) => {
+route.get("/", (req, res) => {
     res.json({
-        status:true,
-        message: "Admin page"
+        status: true,
+        message: "Admin page after middleware"
     })
 });
 
@@ -19,6 +18,8 @@ route.get("/post", getPostsController);
 
 const post = multer('post_img');
 route.post("/post/create", post.single("featured_img"), creatPostController);
+route.get("/post/edit/:id",editPostController);
+
 
 
 // CATEGORY
