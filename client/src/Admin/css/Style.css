@@ -1,0 +1,40 @@
+.admin-panel {
+  padding-left: 300px;
+}
+
+.sidebar {
+  background: gray;
+  width: 300px;
+}
+.sidebar a {
+  color: #fff;
+  display: block;
+}
+.sidebar a:hover {
+  color: #040053;
+}
+.sidebar li {
+  font-size: 20px;
+  margin-bottom: 5px;
+}
+.sidebar .nav-item > a.active {
+  color: red;
+}
+
+.avatar {
+  width: 60px;
+  height: 60px;
+}
+.avatar img {
+  border-radius: 100%;
+  width: 100%;
+  padding: 10px;
+}
+
+.header a {
+  color: #040053;
+}
+
+.nav-item {
+  margin: 0 10px;
+}/*# sourceMappingURL=Style.css.map */

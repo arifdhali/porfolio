@@ -1,0 +1,43 @@
+.admin-panel {
+    padding-left: 300px;
+}
+.sidebar {
+    background: gray;
+    width: 300px;
+
+    a {
+        color: #fff;
+        display: block;
+        &:hover {
+            color: #040053;
+        }
+    }
+    li {
+        font-size: 20px;
+        margin-bottom: 5px;
+    }
+    .nav-item {
+        & > a {
+            &.active {
+                color: red;
+            }
+        }
+    }
+}
+.avatar {
+    width: 60px;
+    height: 60px;
+    img {
+        border-radius: 100%;
+        width: 100%;
+        padding: 10px;
+    }
+}
+.header {
+    a {
+        color: #040053;
+    }
+}
+.nav-item {
+    margin: 0 10px;
+}
