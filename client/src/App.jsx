@@ -26,12 +26,12 @@ const App = () => {
         <Router>
             <Routes>
                 {/* Authuntication */}
-                <Route path='/login' element={<Login />} />
+                <Route path='/login' element={<AdminContext><Login /></AdminContext>} />
                 {/* Public Page */}
                 <Route element={<PublicLayout />}>
                     <Route path='/' element={<Home />} />
                     <Route path='/blog' element={<Blog />} />
-                    <Route path='/blog/:id' element={<BlogSingle />} />
+                    <Route path='/blog/:slug' element={<BlogSingle />} />
                 </Route>
 
                 {/* Admin Page */}

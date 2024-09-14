@@ -1,12 +1,27 @@
-body{
+@import url('https://fonts.googleapis.com/css2?family=Outfit:wght@100..900&display=swap');
+
+body {
     height: 100vh;
+    font-family: "Outfit", sans-serif !important;
+    background: #fff;
 }
-#root{
+
+#root {
     height: 100%;
 }
+
 body a {
     text-decoration: none;
 }
+
+body .text-danger {
+    color: rgb(216, 17, 17) !important;
+}
+
+body .text-success {
+    color: rgb(17, 185, 17) !important;
+}
+
 
 li {
     list-style: none;

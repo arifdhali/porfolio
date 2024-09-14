@@ -145,15 +145,31 @@ body ul {
 
 }
 
-body .text-danger {
-	color: rgb(216, 17, 17) !important;
-}
-
-body .text-success {
-	color: rgb(17, 185, 17) !important;
-}
 
 #password-eye {
 	width: 22px !important;
 	text-align: center;
+}
+
+
+.frontend.header {
+	top: 1rem;
+	z-index: 99;
+	transition: all .5s ease;
+	-webkit-transition: all .5s ease;
+	-moz-transition: all .5s ease;
+	-ms-transition: all .5s ease;
+	-o-transition: all .5s ease;
+}
+
+nav {
+	background: #ff5c04;
+}
+
+.frontend.header a {
+	color: white;
+}
+
+.nav-list .active {
+	color: #feeccc !important;
 }

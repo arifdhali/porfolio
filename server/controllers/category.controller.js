@@ -1,7 +1,7 @@
 let CategoryModel = require("../models/category.model");
-let currentDate = require("../utils/date.utils");
+const {CurrentDate} = require("../utils/index");
 
-let todayDate = currentDate();
+let todayDate = CurrentDate();
 const categoryModelInstance = new CategoryModel(todayDate);
 
 

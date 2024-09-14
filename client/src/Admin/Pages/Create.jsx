@@ -7,6 +7,7 @@ const Create = () => {
         title: '',
         featured_img: null,
         category: '0',
+        excerpt: '',
         content: ''
     });
     const [categories, setCategories] = useState([]);
@@ -69,6 +70,7 @@ const Create = () => {
                     title: '',
                     featured_img: null,
                     category: '0',
+                    excerpt: '',
                     content: ''
                 });
                 setPreviewImg(null);
@@ -137,6 +139,20 @@ const Create = () => {
                             <option value="0">No Category</option>
                         )}
                     </select>
+                </div>
+
+                {/* Excerpt */}
+                <div className="mb-3">
+                    <label htmlFor="excerptTextarea" className="form-label">Excerpt</label>
+                    <textarea
+                        className="form-control"
+                        id="excerptTextarea"
+                        rows="3"
+                        placeholder="Enter your excerpt here"
+                        name='excerpt'
+                        value={postInfo.excerpt}
+                        onChange={handleForm}
+                    ></textarea>
                 </div>
 
                 {/* Content */}

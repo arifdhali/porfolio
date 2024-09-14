@@ -1,7 +1,7 @@
 const postModel = require('../models/post.model');
-const currentDate = require("../utils/date.utils");
+const {CurrentDate,SlugGenerator} = require("../utils/index");
 
-let todayDate = currentDate();
+let todayDate = CurrentDate();
 let postModelInstance = new postModel(todayDate);
 
 
@@ -43,9 +43,13 @@ const creatPostController = async (req, res) => {
             });
         }
 
-        const { title, content, category } = req.body;
+        const { title, excerpt, content, category } = req.body;
+        let titleSlug = SlugGenerator(title);
+
         let processData = [
             title,
+            titleSlug,
+            excerpt,
             content,
             thumbnail.filename,
             category

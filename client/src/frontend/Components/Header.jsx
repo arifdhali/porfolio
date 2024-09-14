@@ -1,19 +1,31 @@
 import React from 'react';
-import { Link } from 'react-router-dom'; 
+import { Link, NavLink } from 'react-router-dom';
 
 const Header = () => {
     return (
-        <header className='header'>
-            <nav>
-                <ul>
-                    <li>
-                        <Link to="/">Home</Link>
-                    </li>
-                    <li>
-                        <Link to="/blog">Blog</Link>
-                    </li>
-                </ul>
-            </nav>
+        <header className='header position-sticky  w-100 my-3 frontend'>
+            <div className="container">
+                <nav className='d-flex align-items-center justify-content-between p-3 rounded-4  start-0'>
+                    <Link>
+                       ARiF
+                    </Link>
+                    <ul className='d-flex gap-3 m-0 nav-list'>
+                        <li>
+                            <NavLink to="/">
+                                Home
+                            </NavLink>
+                        </li>
+                        <li>
+                            <NavLink to="/blog">
+                                Blog
+                            </NavLink>
+                        </li>
+                    </ul>
+                    <div>
+                        <Link className='btn btn-primary text-white' to={'/login'}>Admin</Link>
+                    </div>
+                </nav>
+            </div>
         </header>
     );
 }

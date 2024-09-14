@@ -1,5 +1,5 @@
 const BaseModal = require("./Base.model");
-const QueryReducer = require('../utils/Table_Query_Reducer');
+const { QueryReducer } = require("../utils/index");
 
 class PostModels extends BaseModal {
 
@@ -24,13 +24,13 @@ class PostModels extends BaseModal {
         } catch {
             throw new Error("Error Edit post: " + error.message);
         }
-      
+
     }
 
     async createPost(data) {
         try {
 
-            let columnsName = ['post_title', 'post_content', 'post_thumbnail', 'category_id', 'post_publish_date'];
+            let columnsName = ['post_title', 'post_slug', 'post_excerpt', 'post_content', 'post_thumbnail', 'category_id', 'post_publish_date'];
             let values = QueryReducer(columnsName);
 
             let createQuery = `INSERT INTO post (${columnsName}) VALUES (${values})`;
@@ -38,8 +38,8 @@ class PostModels extends BaseModal {
                 ...data,
                 this.date
             ]
-            let response = await this.excutingQuery(createQuery, processData);
-            return response;
+            return await this.excutingQuery(createQuery, processData);
+
         } catch (error) {
             throw new Error("Error creating post: " + error.message);
         }
@@ -57,10 +57,7 @@ class PostModels extends BaseModal {
 
 
             let inertQuery = `INSERT INTO category_relation (${columnsName}) VALUES(${values})`;
-            let response = await this.excutingQuery(inertQuery, processData);
-
-            return response;
-
+            return await this.excutingQuery(inertQuery, processData);
 
         } catch (error) {
             throw new Error("Error creating post: " + error.message);

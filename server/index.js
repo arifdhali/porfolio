@@ -10,6 +10,7 @@ const cookieParser = require('cookie-parser');
 
 const adminRoutes = require("./routes/admin.routes");
 const authRoutes = require("./routes/auth.routes");
+const HomeRoutes =  require("./routes/home.routes");
 const AuthMiddleware = require('./Auth/middleware');
 
 app.use(cookieParser());
@@ -21,6 +22,8 @@ app.use(cors({
 }))
 app.use(express.static(path.join(__dirname, 'public')));
 
+
+
 // for doing json
 app.use(
     express.json()
@@ -30,9 +33,14 @@ app.use(express.urlencoded({
     extended: true,
 }))
 
+// ADMIN
 app.use("/admin", AuthMiddleware, adminRoutes);
 
+// AUTH
 app.use('/auth', authRoutes);
+
+// NORMAL OR HOME ROUTES
+app.use("/",HomeRoutes);
 
 app.listen(PORT, (err) => {
     if (err) {

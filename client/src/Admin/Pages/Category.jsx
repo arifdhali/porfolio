@@ -216,11 +216,7 @@ const Category = () => {
                     </div>
                 </div>
             </div>
-            {response && (
-                <div className={`alert alert-${response.status ? 'primary' : 'danger'} response-${response.status ? 'success' : 'error'}`} role="alert">
-                    {response.message}
-                </div>
-            )}
+          
         </div>
 
 

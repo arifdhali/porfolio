@@ -1,8 +1,8 @@
 const jwt = require('jsonwebtoken');
 const AuthModel = require("../models/auth.model");
-const currentDate = require('../utils/date.utils');
+const { CurrentDate } = require("../utils/index");
 
-const date = currentDate();
+const date = CurrentDate();
 let time = new Date().getTime();
 let formattedTime = new Date(time).toLocaleTimeString();
 
@@ -25,7 +25,7 @@ const loginController = async (req, res) => {
                 payload,
                 secret,
                 {
-                    expiresIn: "1h"
+                    expiresIn: 1 * 60 * 60 * 1000
                 }
             );
             res.cookie('Login_token', token, { maxAge: 1 * 60 * 60 * 1000, httpOnly: true, SameSite: "None" });
@@ -44,8 +44,11 @@ const loginController = async (req, res) => {
 }
 
 const logOutController = (req, res) => {
-    //const { Login_token } = ;    
-    console.log(res.cookie);
+    res.clearCookie("Login_token");
+    return res.json({
+        status: true,
+        message: "Log out success"
+    })
 }
 
 module.exports = {
