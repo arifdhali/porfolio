@@ -22,13 +22,11 @@ const Post = () => {
     }, [])
     return (
         <div >
-            <ul className='text-end my-3'>
-                <li>
-                    <NavLink to={`create`} className="btn btn-primary">
-                        Add Post
-                    </NavLink>
-                </li>
-            </ul>
+            <div className='text-end my-3'>
+                <NavLink to={`create`} className="btn btn-primary">
+                    Add Post
+                </NavLink>
+            </div>
             <table className="table table-striped table-bordered booking_container pt-0 bg-white rounded-1">
                 <thead>
                     <tr>

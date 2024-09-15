@@ -13,6 +13,7 @@ const Blog = () => {
         }
 
     }
+    console.log(response);
     useEffect(() => {
         GetData();
     }, [])
@@ -24,14 +25,14 @@ const Blog = () => {
                     {
                         response && response.slice(0, 1).map((post, index) => (
                             <div className="card banner-card" key={index}>
-                                <div className="card-body">
+                                <div className="card-body">                                    
                                     <img src={`${import.meta.env.VITE_API_URL}upload/post_img/${post.post_thumbnail}`} alt="" className="img-fluid" />
                                     <div className="banner-card-content">
                                         <span className="post-category text-uppercase">
                                             <i className="fa fa-circle" aria-hidden="true"></i>
                                             <Link href="">{post.post_category}</Link>                                                                                            </span>
                                         <h1 className="entry-title card-title">
-                                            <Link href="">
+                                            <Link to={post.post_slug}>
                                                 {post.post_title}
                                             </Link>
                                         </h1>

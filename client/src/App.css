@@ -173,3 +173,6 @@ nav {
 .nav-list .active {
 	color: #feeccc !important;
 }
+.header li{
+	list-style-type: none;
+}

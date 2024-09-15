@@ -25,7 +25,7 @@ const AdminContext = ({ children }) => {
     }
 
     return (
-        <authContext.Provider value={isAuthenticated}>
+        <authContext.Provider value={{isAuthenticated , setIsAuthenticated}}>
             {children}
         </authContext.Provider>
     );

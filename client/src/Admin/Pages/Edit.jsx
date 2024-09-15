@@ -22,7 +22,13 @@ const Edit = () => {
             const { id } = params;
             let res = await axios.get(`${import.meta.env.VITE_API_URL}admin/post/edit/${id}`);
             if (res?.data?.status) {
-                setResponse(res.data.edit_data || {});
+                let editData = res.data.edit_data || {};
+                setPostInfo({
+                    title: editData[0].post_title,
+                    featured_img: editData[0].post_thumbnail,
+                    category: '0',
+                    content: editData[0].post_content,
+                })
 
             } else {
                 setResponse(null);
@@ -32,33 +38,12 @@ const Edit = () => {
         }
     };
 
-    const getAllCategories = async () => {
-        try {
-            let res = await axios.get(`${import.meta.env.VITE_API_URL}admin/post/categories`);
-            if (res?.data?.status) {
-                setCategories(res.data.categories || []);
-            }
-        } catch (error) {
-            console.error('Error while fetching categories', error.message);
-        }
-    };
 
     useEffect(() => {
         getAllPostData();
-        //getAllCategories();
-        response && response.map((item) => setPostInfo(item))
     }, []);
 
-    useEffect(() => {
-        if (response) {
-            setPostInfo({
-                title: response?.post_title || '',
-                featured_img: response?.featured_img || null,
-                category: response?.category || '0',
-                content: response?.content || ''
-            });
-        }
-    }, [response]);
+
 
     // Handle form input changes
     const handleForm = (e) => {
@@ -113,7 +98,6 @@ const Edit = () => {
         // }
     };
 
-    console.log(postInfo);
     return (
         <div className='pt-5'>
             <form onSubmit={handleSubmit}>
@@ -126,7 +110,7 @@ const Edit = () => {
                         id="postTitle"
                         placeholder="Enter your post title"
                         name='title'
-                        value={postInfo.title || ''}
+                        value={postInfo?.title}
                     />
                 </div>
 
@@ -172,14 +156,12 @@ const Edit = () => {
                 {/* Content */}
                 <div className="mb-3">
                     <label htmlFor="contentTextarea" className="form-label">Content</label>
-                    <textarea
-                        className="form-control"
-                        id="contentTextarea"
-                        rows="3"
-                        placeholder="Enter your content here"
-                        name='content'
-                        value={postInfo.content || ''}
-                    ></textarea>
+                    <div className='border-1'>
+                        <div
+                            id="contentDisplay"
+                            dangerouslySetInnerHTML={{ __html: postInfo.content }}
+                        />
+                    </div>
                 </div>
 
                 {/* Submit Button */}

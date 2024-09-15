@@ -17,19 +17,20 @@ const validationSchema = Yup.object().shape({
 const Login = () => {
     const navigate = useNavigate();
     const [passwordVisibility, setPasswordVisibility] = useState(false);
-    const isAuth = useAuthContext();
-
+    const { isAuthenticated, setIsAuthenticated } = useAuthContext();
     useEffect(() => {
-        if (isAuth) {
+        if (isAuthenticated) {
             navigate("/admin");
         }
-    }, [isAuth, navigate]);
+    }, [isAuthenticated, navigate]);
 
+    
+    
     const handleSubmit = async (values) => {
         try {
             let response = await axios.post(`${import.meta.env.VITE_API_URL}auth/login`, values);
             if (response?.data?.status) {
-                navigate("/admin");
+                setIsAuthenticated(true);
             } else {
                 console.log('You are not valid user');
             }

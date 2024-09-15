@@ -45,6 +45,7 @@ const loginController = async (req, res) => {
 
 const logOutController = (req, res) => {
     res.clearCookie("Login_token");
+    //res.redirect("/");
     return res.json({
         status: true,
         message: "Log out success"

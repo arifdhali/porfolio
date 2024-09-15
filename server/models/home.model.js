@@ -8,7 +8,7 @@ class ShowToFrontend_Models extends BaseModal {
 
     async getSingleLatestModal() {
         try {
-            let getSql = 'SELECT post_title, post_content, post_thumbnail FROM post ORDER BY post_publish_date DESC LIMIT 1';
+            let getSql = 'SELECT post_title, post_slug, post_content, post_thumbnail FROM post ORDER BY post_publish_date DESC LIMIT 1';
             return await this.excutingQuery(getSql);
         } catch (error) {
             throw new Error("Error while geting lastes post " + error.message);
@@ -18,3 +18,4 @@ class ShowToFrontend_Models extends BaseModal {
 }
 
 module.exports = ShowToFrontend_Models;
+

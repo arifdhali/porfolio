@@ -6,7 +6,7 @@ const Sidebar = () => {
         <div className='sidebar position-fixed start-0 h-100 bg-dark p-3'>
             <ul className='nav flex-column'>
                 <li className='nav-item'>
-                    <Link to={`/admin`} className='nav-link'>Logo</Link>
+                    <Link to={`/admin`} className='nav-link'>ARiF</Link>
                 </li>
 
                 <li className='nav-item' >

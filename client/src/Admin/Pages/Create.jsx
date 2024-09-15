@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
+import Editor from 'react-simple-wysiwyg';
 
 const Create = () => {
     const [response, setResponse] = useState(null);
@@ -158,7 +159,7 @@ const Create = () => {
                 {/* Content */}
                 <div className="mb-3">
                     <label htmlFor="contentTextarea" className="form-label">Content</label>
-                    <textarea
+                    {/* <textarea
                         className="form-control"
                         id="contentTextarea"
                         rows="3"
@@ -166,8 +167,18 @@ const Create = () => {
                         name='content'
                         value={postInfo.content}
                         onChange={handleForm}
-                    ></textarea>
+                    ></textarea> */}
+                    <Editor
+                        value={postInfo.content}
+                        onChange={(e) => setPostInfo(prev => ({
+                            ...prev,
+                            content: e.target.value
+                        }))}
+                    />
+
                 </div>
+
+
 
                 {/* Submit Button */}
                 <div className="mb-3">

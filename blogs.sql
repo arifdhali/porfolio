@@ -1,11 +1,11 @@
 -- phpMyAdmin SQL Dump
--- version 5.1.1
+-- version 5.2.0
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1:3306
--- Generation Time: Sep 06, 2024 at 12:23 PM
--- Server version: 8.0.27
--- PHP Version: 7.4.26
+-- Generation Time: Sep 15, 2024 at 06:18 PM
+-- Server version: 8.0.31
+-- PHP Version: 8.0.26
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -34,25 +34,7 @@ CREATE TABLE IF NOT EXISTS `category_relation` (
   `category_id` int DEFAULT NULL,
   `date` date DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=MyISAM AUTO_INCREMENT=14 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
-
---
--- Dumping data for table `category_relation`
---
-
-INSERT INTO `category_relation` (`id`, `post_id`, `category_id`, `date`) VALUES
-(2, 1, 30, '2024-09-05'),
-(3, 4, 27, '2024-09-05'),
-(4, 5, 27, '2024-09-05'),
-(5, 6, 27, '2024-09-05'),
-(6, 7, 27, '2024-09-05'),
-(7, 8, 27, '2024-09-05'),
-(8, 9, 27, '2024-09-05'),
-(9, 10, 30, '2024-09-05'),
-(10, 11, 30, '2024-09-05'),
-(11, 12, 27, '2024-09-05'),
-(12, 13, 29, '2024-09-05'),
-(13, 14, 27, '2024-09-06');
+) ENGINE=MyISAM DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
 -- --------------------------------------------------------
 
@@ -64,33 +46,15 @@ DROP TABLE IF EXISTS `post`;
 CREATE TABLE IF NOT EXISTS `post` (
   `id` int NOT NULL AUTO_INCREMENT,
   `post_title` text,
-  `post_content` mediumtext,
+  `post_slug` mediumtext CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci,
+  `post_excerpt` mediumtext CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci,
+  `post_content` longtext CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci,
   `post_thumbnail` text,
   `category_id` int DEFAULT NULL,
   `post_status` enum('1','0') CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci DEFAULT '1',
   `post_publish_date` date DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=MyISAM AUTO_INCREMENT=15 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
-
---
--- Dumping data for table `post`
---
-
-INSERT INTO `post` (`id`, `post_title`, `post_content`, `post_thumbnail`, `category_id`, `post_status`, `post_publish_date`) VALUES
-(1, 'What is Python ', 'Here all content', 'featured_img-photo-1570158268183-d296b2892211.jpeg', 30, '1', '2024-09-05'),
-(2, NULL, 'ds', 'featured_img-photo-1500648767791-00dcc994a43e.jpeg', NULL, '1', '2024-09-05'),
-(3, 'afds', 'ds', 'featured_img-photo-1500648767791-00dcc994a43e.jpeg', NULL, '0', '2024-09-05'),
-(4, 'Nostrud molestiae in', 'Aut voluptas ex volu', 'featured_img-photo-1554151228-14d9def656e4.jpeg', 27, '1', '2024-09-05'),
-(5, 'Nostrud molestiae in', 'Aut voluptas ex volu', 'featured_img-photo-1554151228-14d9def656e4.jpeg', 27, '1', '2024-09-05'),
-(6, 'Nostrud molestiae in', 'Aut voluptas ex volu', 'featured_img-photo-1554151228-14d9def656e4.jpeg', 27, '1', '2024-09-05'),
-(7, 'Nostrud molestiae in', 'Aut voluptas ex volu', 'featured_img-photo-1554151228-14d9def656e4.jpeg', 27, '1', '2024-09-05'),
-(8, 'Nostrud molestiae in', 'Aut voluptas ex volu', 'featured_img-photo-1554151228-14d9def656e4.jpeg', 27, '0', '2024-09-05'),
-(9, 'Nostrud molestiae in', 'Aut voluptas ex volu', 'featured_img-photo-1554151228-14d9def656e4.jpeg', 27, '1', '2024-09-05'),
-(10, 'Ea quae et anim qui', 'Porro minima rem et ', 'featured_img-photo-1534528741775-53994a69daeb.jpeg', 30, '1', '2024-09-05'),
-(11, 'Ea quae et anim qui', 'Porro minima rem et ', 'featured_img-photo-1534528741775-53994a69daeb.jpeg', 30, '1', '2024-09-05'),
-(12, 'Arif', 'Ex quas fugiat conse', 'featured_img-photo-1506794778202-cad84cf45f1d.jpeg', 27, '1', '2024-09-05'),
-(13, 'C++ is best option for future ?', 'Yes', 'featured_img-photo-1506794778202-cad84cf45f1d.jpeg', 29, '1', '2024-09-05'),
-(14, 'Aut exercitationem N', 'In proident volupta', 'featured_img-photo-1570158268183-d296b2892211.jpeg', 27, '1', '2024-09-06');
+) ENGINE=MyISAM DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
 -- --------------------------------------------------------
 
@@ -105,7 +69,7 @@ CREATE TABLE IF NOT EXISTS `post_category` (
   `subscribe_status` enum('true','false') CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NOT NULL DEFAULT 'false',
   `create_date` date DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=MyISAM AUTO_INCREMENT=37 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=MyISAM AUTO_INCREMENT=38 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
 --
 -- Dumping data for table `post_category`
@@ -114,10 +78,10 @@ CREATE TABLE IF NOT EXISTS `post_category` (
 INSERT INTO `post_category` (`id`, `category`, `subscribe_status`, `create_date`) VALUES
 (35, 'C#', 'false', '2024-09-04'),
 (36, 'Biology', 'false', '2024-09-06'),
-(31, 'Test', 'false', '2024-09-04'),
 (30, 'Python', 'false', '2024-09-04'),
 (29, 'C++', 'false', '2024-09-04'),
-(27, 'Java', 'false', '2024-09-03');
+(27, 'Java', 'false', '2024-09-03'),
+(37, 'Docker', 'false', '2024-09-07');
 
 -- --------------------------------------------------------
 
@@ -139,14 +103,14 @@ CREATE TABLE IF NOT EXISTS `users` (
   `last_login` time DEFAULT NULL,
   `password` text NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=MyISAM AUTO_INCREMENT=4 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=MyISAM AUTO_INCREMENT=5 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
 --
 -- Dumping data for table `users`
 --
 
 INSERT INTO `users` (`id`, `name`, `age`, `email`, `gender`, `phone_number`, `country`, `address`, `login_date`, `last_login`, `password`) VALUES
-(1, 'arif', 23, 'arif@gmail.com', 'male', 232132321, 'india', 'kolkata', '2024-09-06', '10:14:49', 'admin1');
+(1, 'arif', 23, 'arif@gmail.com', 'male', 232132321, 'india', 'kolkata', '2024-09-15', '11:38:29', 'admin1');
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;

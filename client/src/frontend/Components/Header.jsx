@@ -6,7 +6,7 @@ const Header = () => {
         <header className='header position-sticky  w-100 my-3 frontend'>
             <div className="container">
                 <nav className='d-flex align-items-center justify-content-between p-3 rounded-4  start-0'>
-                    <Link>
+                    <Link to={'/'}>
                        ARiF
                     </Link>
                     <ul className='d-flex gap-3 m-0 nav-list'>
