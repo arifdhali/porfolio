@@ -7,7 +7,7 @@ const Header = () => {
             <div className="container">
                 <nav className='d-flex align-items-center justify-content-between p-3 rounded-4  start-0'>
                     <Link to={'/'}>
-                       ARiF
+                        {import.meta.env.VITE_SITE_TITLE}
                     </Link>
                     <ul className='d-flex gap-3 m-0 nav-list'>
                         <li>
@@ -22,7 +22,7 @@ const Header = () => {
                         </li>
                     </ul>
                     <div>
-                        <Link className='btn btn-primary text-white' to={'/login'}>Admin</Link>
+                        <Link className='btn btn-primary text-white' to={'/login'}>Login</Link>
                     </div>
                 </nav>
             </div>

@@ -43,7 +43,7 @@ const Login = () => {
         <section className="login-form uni-padding">
             <div className="container">
                 <div className='text-center my-5'>
-                    <h1><Link to={'/'}>ARiF</Link></h1>
+                    <h1><Link to={'/'}>{import.meta.env.VITE_SITE_TITLE}</Link></h1>
                 </div>
                 <Formik
                     initialValues={{ email: '', password: '' }}
