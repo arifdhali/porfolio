@@ -9,6 +9,22 @@
     z-index: 100;
 }
 
+.mobile.loader {
+    position: absolute;
+    top: 50%;
+    right: 0;
+    background: transparent;
+    transform: translate(0, -50%);
+}
+
+.mobile .spinner {
+    width: 35px;
+    height: 35px;
+    right: -50px;
+    background: radial-gradient(farthest-side, #474bff 95%, #0000) 50% 0/ 10px 10px no-repeat, radial-gradient(farthest-side, #0000 calc(100% - 5.6px), #fff calc(100% - 4.5px)) content-box;
+
+}
+
 .loader {
     position: fixed;
     top: 0;

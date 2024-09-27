@@ -32,7 +32,7 @@ const Post = () => {
                     <tr>
                         <th style={{ width: "8%" }}>ID</th>
                         <th style={{ width: "25%" }}>Post Name</th>
-                        <th style={{ width: "25%" }} className="text-center">Post Content</th>
+                        <th style={{ width: "25%" }} className="text-center">Post Excerpt</th>
                         <th style={{ width: "15%" }}>Date Created</th>
                         <th className='text-center' style={{ width: "10%" }}>Status</th>
                         <th className='text-center' style={{ width: "8%" }}>Actions</th>
@@ -47,7 +47,7 @@ const Post = () => {
                                     <td valign='middle'>{index + 1}</td>
                                     <td valign='middle'>{post.post_title}</td>
                                     <td valign='middle' className="text-center page-url">
-                                        {post.post_content}
+                                        {post.post_excerpt}
                                     </td>
                                     <td valign='middle'>{new Date(post.post_publish_date).toLocaleDateString()}</td>
                                     <td valign='middle' className="action-cont text-center ">

@@ -10,4 +10,15 @@ const Loader = () => {
     )
 }
 
-export default Loader
+
+const ButtonLoader = () => {
+    return (
+        <div className="mobile loader">
+            <div className="spinner"></div>
+        </div>
+
+    )
+
+};
+
+export { Loader, ButtonLoader }

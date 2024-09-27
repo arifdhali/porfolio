@@ -4,6 +4,7 @@ import { Formik, Form, Field, ErrorMessage } from 'formik';
 import * as Yup from 'yup';
 import axios from 'axios';
 import { useAuthContext } from './AuthContext';
+import { ButtonLoader } from '../Utils/Loader';
 
 const validationSchema = Yup.object().shape({
     email: Yup.string()
@@ -15,6 +16,7 @@ const validationSchema = Yup.object().shape({
 });
 
 const Login = () => {
+    const [error, setError] = useState();
     const navigate = useNavigate();
     const [passwordVisibility, setPasswordVisibility] = useState(false);
     const { isAuthenticated, setIsAuthenticated } = useAuthContext();
@@ -24,15 +26,15 @@ const Login = () => {
         }
     }, [isAuthenticated, navigate]);
 
-    
-    
+
+
     const handleSubmit = async (values) => {
         try {
             let response = await axios.post(`${import.meta.env.VITE_API_URL}auth/login`, values);
             if (response?.data?.status) {
                 setIsAuthenticated(true);
             } else {
-                console.log('You are not valid user');
+                setError(response?.data?.message);
             }
         } catch (error) {
             console.log(error.message);
@@ -42,8 +44,9 @@ const Login = () => {
     return (
         <section className="login-form uni-padding">
             <div className="container">
-                <div className='text-center my-5'>
+                <div className='text-center my-4'>
                     <h1><Link to={'/'}>{import.meta.env.VITE_SITE_TITLE}</Link></h1>
+                    <p className="m-0 text-danger">{error && error}</p>
                 </div>
                 <Formik
                     initialValues={{ email: '', password: '' }}
@@ -52,6 +55,8 @@ const Login = () => {
                 >
                     {({ isSubmitting }) => (
                         <Form className="form">
+
+
                             <div className="form-item">
                                 <label className="form-label">Email</label>
                                 <Field
@@ -81,9 +86,16 @@ const Login = () => {
                                     <ErrorMessage name="password" component="div" className="text-danger" />
                                 </div>
                             </div>
+
                             <div className="form-signin mb-3">
-                                <button type="submit" className="btn btn-primary" disabled={isSubmitting}>
-                                    Login
+                                <button type="submit" className="btn btn-primary position-relative" disabled={isSubmitting}>
+                                    {
+                                        isSubmitting ? (<>
+                                            Login... <ButtonLoader />
+                                        </>) : (<>
+                                            Login
+                                        </>)
+                                    }
                                 </button>
                             </div>
                         </Form>

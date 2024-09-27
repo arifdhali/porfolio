@@ -1,6 +1,6 @@
 import axios from 'axios';
 import React, { createContext, useContext, useEffect, useState } from 'react';
-import Loader from '../Utils/Loader';
+import {Loader} from '../Utils/Loader';
 
 const authContext = createContext();
 

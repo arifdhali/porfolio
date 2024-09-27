@@ -10,7 +10,7 @@ class PostModels extends BaseModal {
 
     async getPosts(id) {
         try {
-            let getQuery = 'SELECT id, post_title,post_content,post_status,post_publish_date FROM post';
+            let getQuery = 'SELECT id, post_title,post_excerpt,post_status,post_publish_date FROM post';
             if (id) {
                 let getSelectPost = `SELECT P.id, P.category_id, P.post_title, P.post_content, P.post_thumbnail, PC.category as post_category
                                     FROM post P

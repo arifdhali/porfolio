@@ -7,7 +7,7 @@ const BlogSingle = () => {
 
   const getBlogDetails = async () => {
     const response = await axios.get(`${import.meta.env.VITE_API_URL}blog/${slug}`);
-    console.log(slug)
+    console.log(response)
   }
   useEffect(() => {
     getBlogDetails();
