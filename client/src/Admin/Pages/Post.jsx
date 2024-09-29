@@ -6,6 +6,8 @@ import { Link, NavLink } from 'react-router-dom'
 const Post = () => {
     const [getposts, setGetPosts] = useState(null);
     const [response, setResponse] = useState(null);
+    const [deleteId, setDeleteId] = useState(null);
+
     const getPost = async () => {
         try {
             const res = await axios.get(`${import.meta.env.VITE_API_URL}admin/post`);
@@ -16,6 +18,18 @@ const Post = () => {
             setResponse({ status: false, message: error.message });
         }
     };
+    const deletePostHandle = async () => {        
+        try {
+            const res = await axios.delete(`${import.meta.env.VITE_API_URL}admin/post/${deleteId}`);
+            if (res.status === 200) {
+                setGetPosts(getposts.filter(post => post.id !== deleteId));
+                document.querySelector("#DeleteModal .btn-close").click();
+            }
+        } catch (error) {
+            console.error('Error deleting post:', error);
+        }
+    };
+
 
     useEffect(() => {
         getPost();
@@ -44,20 +58,20 @@ const Post = () => {
                             getposts.map((post, index) => (
                                 <tr key={post.id}>
 
-                                    <td valign='middle'>{index + 1}</td>
-                                    <td valign='middle'>{post.post_title}</td>
-                                    <td valign='middle' className="text-center page-url">
+                                    <td>{index + 1}</td>
+                                    <td>{post.post_title}</td>
+                                    <td className="text-center page-url">
                                         {post.post_excerpt}
                                     </td>
-                                    <td valign='middle'>{new Date(post.post_publish_date).toLocaleDateString()}</td>
-                                    <td valign='middle' className="action-cont text-center ">
+                                    <td>{new Date(post.post_publish_date).toLocaleDateString()}</td>
+                                    <td className="action-cont text-center ">
                                         <i className={` fa-solid fa-circle text-${post.post_status == 1 ? "success" : "danger blink"}`} ></i>
                                     </td>
-                                    <td valign="middle" className="action-cont text-center">
+                                    <td className="action-cont text-center">
                                         <Link to={`${post.id}/edit`} className='btn btn-sm btn-outline-primary me-2'>
                                             <i className="fa-regular fa-pen-to-square"></i>
                                         </Link>
-                                        <button data-bs-toggle="modal" data-bs-target="#DeleteModal" className="btn btn-sm btn-outline-danger">
+                                        <button onClick={() => setDeleteId(post.id)} data-bs-toggle="modal" data-bs-target="#DeleteModal" className="btn btn-sm btn-outline-danger">
                                             <i className="fa-regular fa-trash-can"></i>
                                         </button>
                                     </td>
@@ -84,7 +98,7 @@ const Post = () => {
                             <label className="form-label">Are you sure you want to delete this category?</label>
                         </div>
                         <div className="modal-footer justify-content-start">
-                            <button type="button" className="btn btn-primary me-1 px-4" >Yes</button>
+                            <button type="button" className="btn btn-primary me-1 px-4" onClick={deletePostHandle} >Yes</button>
                             <button type="button" className="btn btn-outline-danger px-4" data-bs-dismiss="modal">No</button>
                         </div>
                     </div>

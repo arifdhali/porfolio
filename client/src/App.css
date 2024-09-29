@@ -153,7 +153,7 @@ body ul {
 
 
 .frontend.header {
-	top: 1rem;
+top: 0;	
 	z-index: 99;
 	transition: all .5s ease;
 	-webkit-transition: all .5s ease;
@@ -162,7 +162,7 @@ body ul {
 	-o-transition: all .5s ease;
 }
 
-nav {
+.frontend {
 	background: #ff5c04;
 }
 

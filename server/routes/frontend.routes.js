@@ -5,6 +5,7 @@ const route = express.Router();
 
 
 route.get("/", HomeRouteControllers);
-route.get("/blog/:post_url", blogSingleControllers);
+route.get("/blog/:slug", blogSingleControllers);
 
 module.exports = route;
+

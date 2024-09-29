@@ -1,17 +1,18 @@
 const jwt = require('jsonwebtoken');
 const AuthModel = require("../models/auth.model");
 const { CurrentDate } = require("../utils/index");
-
+const Email_ArrangeData = require("../email/Email_ArrangeData");
+const { login_template } = require("../email/Template")
 const date = CurrentDate();
 let time = new Date().getTime();
 let formattedTime = new Date(time).toLocaleTimeString();
 
 const authModelInstance = new AuthModel(date, formattedTime);
+const send_email = new Email_ArrangeData();
 
 const loginController = async (req, res) => {
     try {
         const { email, password } = req.body;
-
 
         // Check login credentials
         let user = await authModelInstance.loginModels(email, password);
@@ -25,13 +26,38 @@ const loginController = async (req, res) => {
                 payload,
                 secret,
                 {
-                    expiresIn: 1 * 60 * 60 * 1000
+                    expiresIn: 1 * 60 * 60
                 }
             );
-            res.cookie('Login_token', token, { maxAge: 1 * 60 * 60 * 1000, httpOnly: true, SameSite: "None" });
+
+            res.cookie('Login_token', token, { maxAge: 1 * 60 * 60 * 1000, httpOnly: true, sameSite: "None" });
+
+            // Email content
+            let content = {
+                to: email,
+                subject: "Login Alert",
+                text: "Arif Blog",
+                html: login_template("Arif", formattedTime, date)
+            };
+
+            // Send login notification email
+            let emailResponse = await send_email.sendMail(content);
+            console.log(emailResponse);
+            if (!emailResponse?.messageId) {
+                return res.json({
+                    status: false,
+                    message: "Email sending failed"
+                });
+            }
             return res.json({
                 status: true,
                 message: "Login successful"
+            });
+
+        } else {
+            return res.json({
+                status: false,
+                message: "Invalid email or password"
             });
         }
 
@@ -45,11 +71,10 @@ const loginController = async (req, res) => {
 
 const logOutController = (req, res) => {
     res.clearCookie("Login_token");
-    //res.redirect("/");
     return res.json({
         status: true,
-        message: "Log out success"
-    })
+        message: "Log out successful"
+    });
 }
 
 module.exports = {

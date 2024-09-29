@@ -9,11 +9,11 @@ const Blog = () => {
         if (response?.data?.status) {
             setResponse(response?.data?.data);
         } else {
+            console.log(response);
             setResponse(response?.data);
         }
 
     }
-    console.log(response);
     useEffect(() => {
         GetData();
     }, [])
@@ -23,7 +23,7 @@ const Blog = () => {
             <div className="row">
                 <div className="col-lg-8">
                     {
-                        response && response.slice(0, 1).map((post, index) => (
+                        response && response?.map((post, index) => (
                             <div className="card banner-card" key={index}>
                                 <div className="card-body">                                    
                                     <img src={`${import.meta.env.VITE_API_URL}upload/post_img/${post.post_thumbnail}`} alt="" className="img-fluid" />

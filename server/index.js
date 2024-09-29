@@ -10,7 +10,7 @@ const cookieParser = require('cookie-parser');
 
 const adminRoutes = require("./routes/admin.routes");
 const authRoutes = require("./routes/auth.routes");
-const frontEndRoutes =  require("./routes/frontend.routes");
+const frontEndRoutes = require("./routes/frontend.routes");
 const AuthMiddleware = require('./Auth/middleware');
 
 app.use(cookieParser());
@@ -40,9 +40,12 @@ app.use("/admin", AuthMiddleware, adminRoutes);
 app.use('/auth', authRoutes);
 
 // NORMAL OR HOME ROUTES
-app.use("/",frontEndRoutes);
+app.use("/", frontEndRoutes);
 
 // BLOG SINGLE
+
+
+
 
 
 app.listen(PORT, (err) => {

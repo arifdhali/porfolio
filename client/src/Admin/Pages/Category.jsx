@@ -56,9 +56,9 @@ const Category = () => {
 
     const handleDelete = async () => {
         try {
-            const response = await axios.delete(`${import.meta.env.VITE_API_URL}admin/post/category/${selectedItem.id}`);
+            const response = await axios.delete(`${import.meta.env.VITE_API_URL}admin/post/category/${selectedItem.category_id}`);
             if (response?.data?.status) {
-                setCategories(categories.filter(cat => cat.id !== selectedItem.id));
+                setCategories(categories.filter(cat => cat.category_id !== selectedItem.category_id));
                 setSelectedItem(null);
                 document.querySelector("#DeleteModal .btn-close").click();
 
@@ -70,12 +70,12 @@ const Category = () => {
 
     const handleEdit = async () => {
         try {
-            const response = await axios.patch(`${import.meta.env.VITE_API_URL}admin/post/category/edit/${selectedItem.id}`, editCategory);
+            const response = await axios.patch(`${import.meta.env.VITE_API_URL}admin/post/category/edit/${selectedItem.category_id}`, editCategory);
             console.log(response);
             const { status, message } = response.data;
             setResponse({ status, message });
             if (status) {
-                setCategories(categories.map(cat => (cat.id === selectedItem.id ? { ...cat, ...editCategory } : cat)));
+                setCategories(categories.map(cat => (cat.category_id === selectedItem.category_id ? { ...cat, ...editCategory } : cat)));
                 setSelectedItem(null);
                 document.querySelector("#EditModal .btn-close").click();
 
@@ -216,7 +216,7 @@ const Category = () => {
                     </div>
                 </div>
             </div>
-          
+
         </div>
 
 

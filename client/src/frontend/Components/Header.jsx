@@ -3,7 +3,7 @@ import { Link, NavLink } from 'react-router-dom';
 
 const Header = () => {
     return (
-        <header className='header position-sticky  w-100 my-3 frontend'>
+        <header className='header position-sticky  w-100 mb-3 frontend'>
             <div className="container">
                 <nav className='d-flex align-items-center justify-content-between p-3 rounded-4  start-0'>
                     <Link to={'/'}>

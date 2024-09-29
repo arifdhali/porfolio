@@ -67,7 +67,8 @@ const getCategory = async (req, res) => {
 // DELETE request
 
 const deleteCategory = async (req, res) => {
-    const { id } = req.params;
+    const { id } = req.params;    
+
     try {
         await categoryModelInstance.deleteCateogry(id);
         return res.json({

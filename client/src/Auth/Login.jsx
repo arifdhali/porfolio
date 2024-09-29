@@ -31,6 +31,7 @@ const Login = () => {
     const handleSubmit = async (values) => {
         try {
             let response = await axios.post(`${import.meta.env.VITE_API_URL}auth/login`, values);
+            console.log(response);
             if (response?.data?.status) {
                 setIsAuthenticated(true);
             } else {

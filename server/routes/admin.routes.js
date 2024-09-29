@@ -1,7 +1,7 @@
 const express = require('express');
 const route = express.Router();
 const { createCategory, getCategory, deleteCategory, updateCategory } = require('../controllers/category.controller');
-const { creatPostController, getPostsController, editPostController } = require('../controllers/post.controller');
+const { creatPostController, getPostsController, editPostController, deletePostController } = require('../controllers/post.controller');
 const multer = require('../utils/Multer.config');
 
 
@@ -19,6 +19,8 @@ route.get("/post", getPostsController);
 const post = multer('post_img');
 route.post("/post/create", post.single("featured_img"), creatPostController);
 route.get("/post/edit/:id",editPostController);
+route.delete("/post/:id",deletePostController);
+
 
 
 

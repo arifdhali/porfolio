@@ -1,5 +1,5 @@
 const postModel = require('../models/post.model');
-const {CurrentDate,SlugGenerator} = require("../utils/index");
+const { CurrentDate, SlugGenerator } = require("../utils/index");
 
 let todayDate = CurrentDate();
 let postModelInstance = new postModel(todayDate);
@@ -112,8 +112,35 @@ const editPostController = async (req, res) => {
 
 }
 
+const deletePostController = async (req, res) => {
+    try {
+        const { id } = req.params;
+        const result = await postModelInstance.deletePost(id);
+        if (result.affectedRows > 0) {
+            return res.json({
+                status: true,
+                message: "Post deleted successfully",
+            });
+        } else {
+            return res.json({
+                status: false,
+                message: "No post found with the given ID",
+            });
+        }
+
+    } catch (error) {
+        return res.json({
+            status: false,
+            message: "Internal Server Error",
+            error: error.message || "Unknown error occurred",
+        });
+    }
+};
+
+
 module.exports = {
     getPostsController,
     creatPostController,
-    editPostController
+    editPostController,
+    deletePostController
 };
