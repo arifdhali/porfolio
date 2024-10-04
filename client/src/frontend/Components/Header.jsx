@@ -20,6 +20,11 @@ const Header = () => {
                                 Blog
                             </NavLink>
                         </li>
+                        <li>
+                            <NavLink to="/github">
+                                Git
+                            </NavLink>
+                        </li>
                     </ul>
                     <div>
                         <Link className='btn btn-primary text-white' to={'/login'}>Login</Link>

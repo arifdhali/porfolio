@@ -7,7 +7,7 @@ import AdminLayout from './Layout/AdminLayout';
 
 
 // public
-import { Blog, BlogSingle, Home } from './frontend/Pages';
+import { Blog, BlogSingle, Github, Home } from './frontend/Pages';
 // admin
 import { Admin_Home, Category, Comment, Create, Edit, Post } from './Admin/Pages';
 
@@ -30,6 +30,7 @@ const App = () => {
                 {/* Public Page */}
                 <Route element={<PublicLayout />}>
                     <Route path='/' element={<Home />} />
+                    <Route path='/github' element={<Github />} />
                     <Route path='/blog' element={<Blog />} />
                     <Route path='/blog/:slug' element={<BlogSingle />} />
                 </Route>

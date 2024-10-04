@@ -8,6 +8,7 @@ const path = require("path");
 const cors = require('cors');
 const cookieParser = require('cookie-parser');
 
+const gitRoutes = require('./routes/git.routes');
 const adminRoutes = require("./routes/admin.routes");
 const authRoutes = require("./routes/auth.routes");
 const frontEndRoutes = require("./routes/frontend.routes");
@@ -43,6 +44,8 @@ app.use('/auth', authRoutes);
 app.use("/", frontEndRoutes);
 
 // BLOG SINGLE
+
+app.use("/github", gitRoutes);
 
 
 
