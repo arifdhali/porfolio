@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { Outlet, useNavigate } from 'react-router-dom';
 import { Sidebar, Header } from '../Admin/Components';
-import "../Admin/css/style.min.css";
+import "../Admin/css/Style.min.css";
 import { useAuthContext } from '../Auth/AuthContext';
 
 const AdminLayout = () => {
