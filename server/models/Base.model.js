@@ -18,7 +18,6 @@ class BaseModal {
 
     // making this for usage processDatabase
     excutingQuery(query, processData) {
-        console.log(processData);
         return this.#ProcessDatabase(query, processData);
     }
 

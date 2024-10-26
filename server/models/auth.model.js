@@ -15,7 +15,7 @@ class AuthModels extends BaseModal {
             ];
             let loginQuery = 'SELECT id FROM users WHERE email = ? AND password = ?';
             let res = await this.excutingQuery(loginQuery, processData);
-
+            console.log(res);
             if (res.length > 0) {
                 let user = res[0];
                 let insertData = [

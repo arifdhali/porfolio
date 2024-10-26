@@ -42,7 +42,6 @@ const loginController = async (req, res) => {
 
             // Send login notification email
             let emailResponse = await send_email.sendMail(content);
-            console.log(emailResponse);
             if (!emailResponse?.messageId) {
                 return res.json({
                     status: false,
